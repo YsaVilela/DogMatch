@@ -1,0 +1,35 @@
+name: dog_match_mobile
+description: A new Flutter project.
+publish_to: 'none'
+version: 1.0.0
+
+environment:
+  sdk: '>=3.1.0 <4.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  http: ^1.1.0
+  mocktail: ^1.0.3
+  equatable: ^2.0.5
+  dartz: ^0.10.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - lib/src/core/assets/images/banner_principal.jpg
+  fonts:
+    - family: Amaranth
+      fonts:
+        - asset: lib/src/core/assets/fonts/Amaranth-Bold.ttf
+        - asset: lib/src/core/assets/fonts/Amaranth-BoldItalic.ttf 
+          style: italic
+        - asset: lib/src/core/assets/fonts/Amaranth-Regular.ttf
+        - asset: lib/src/core/assets/fonts/Amaranth-Italic.ttf
+          style: italic
