@@ -1,0 +1,37 @@
+{
+	"info": {
+		"_postman_id": "62ef1390-b4d4-41d5-8715-6cdc722ad9dc",
+		"name": "Tutor",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29072219"
+	},
+	"item": [
+		{
+			"name": "Cadastrar Tutor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Ysadora\",\r\n    \"sobrenome\": \"Vilela\",\r\n    \"dataDeNascimento\": \"04/11/2004\",\r\n    \"genero\": \"Feminino\",\r\n    \"cpf\": \"525.580.614-53\",\r\n    \"telefone\": \"(11)97721-5009\",\r\n    \"email\": \"ysa.vi.l.silva@hotmail.com.br\",\r\n    \"endereco\": {\r\n        \"cep\": \"05819-060\",\r\n        \"logradouro\": \"Rua Monforte da Beira\",\r\n        \"numero\": \"168\",\r\n        \"complemento\": \"\",\r\n        \"bairro\": \"Jardim Santa Josefina\",\r\n        \"cidade\": \"São Paulo\",\r\n        \"UF\": \"SP\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_principal}}/tutor/cadastrar",
+					"host": [
+						"{{url_principal}}"
+					],
+					"path": [
+						"tutor",
+						"cadastrar"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
