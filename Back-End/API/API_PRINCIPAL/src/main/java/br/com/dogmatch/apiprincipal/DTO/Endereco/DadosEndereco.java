@@ -24,5 +24,5 @@ public record DadosEndereco(
 		String cidade,
 
 		@NotBlank(message = "UF  é obrigatório") 
-		String UF) {
+		String uf) {
 }

@@ -1,0 +1,45 @@
+{
+	"info": {
+		"_postman_id": "f646c043-5513-42c4-b426-21888a6a21c2",
+		"name": "Dominio",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29072219"
+	},
+	"item": [
+		{
+			"name": "Buscar Estados",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url_dominio}}/estados",
+					"host": [
+						"{{url_dominio}}"
+					],
+					"path": [
+						"estados"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Cidade Por UF",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url_dominio}}/cidades/SP",
+					"host": [
+						"{{url_dominio}}"
+					],
+					"path": [
+						"cidades",
+						"SP"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

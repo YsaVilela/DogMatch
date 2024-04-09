@@ -9,11 +9,21 @@
 		{
 			"name": "Cadastrar Tutor",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nome\": \"Ysadora\",\r\n    \"sobrenome\": \"Vilela\",\r\n    \"dataDeNascimento\": \"04/11/2004\",\r\n    \"genero\": \"Feminino\",\r\n    \"cpf\": \"525.580.614-53\",\r\n    \"telefone\": \"(11)97721-5009\",\r\n    \"email\": \"ysa.vi.l.silva@hotmail.com.br\",\r\n    \"endereco\": {\r\n        \"cep\": \"05819-060\",\r\n        \"logradouro\": \"Rua Monforte da Beira\",\r\n        \"numero\": \"168\",\r\n        \"complemento\": \"\",\r\n        \"bairro\": \"Jardim Santa Josefina\",\r\n        \"cidade\": \"São Paulo\",\r\n        \"UF\": \"SP\"\r\n    }\r\n}",
+					"raw": "{\r\n    \"nome\": \"Ysadora\",\r\n    \"sobrenome\": \"Vilela\",\r\n    \"dataDeNascimento\": \"04/11/2004\",\r\n    \"genero\": \"Feminino\",\r\n    \"cpf\": \"565.216.108-64\",\r\n    \"telefone\": \"(11)97721-5008\",\r\n    \"email\": \"ysa@hotmail.com.br\",\r\n    \"endereco\": {\r\n        \"cep\": \"05819-060\",\r\n        \"logradouro\": \"Rua Monforte da Beira\",\r\n        \"numero\": \"168\",\r\n        \"complemento\": \"\",\r\n        \"bairro\": \"Jardim Santa Josefina\",\r\n        \"cidade\": \"São Paulo\",\r\n        \"uf\": \"SP\"\r\n    },\r\n    \"senha\":\"1234567A\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -21,10 +31,15 @@
 					}
 				},
 				"url": {
-					"raw": "{{url_principal}}/tutor/cadastrar",
+					"raw": "http://192.168.15.189:8080/tutor/cadastrar",
+					"protocol": "http",
 					"host": [
-						"{{url_principal}}"
+						"192",
+						"168",
+						"15",
+						"189"
 					],
+					"port": "8080",
 					"path": [
 						"tutor",
 						"cadastrar"

@@ -1,7 +1,6 @@
 package br.com.dogmatch.apiprincipal.infra.Exception.tratamento;
 
-import java.util.List;
-
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -16,21 +15,24 @@ import br.com.dogmatch.apiprincipal.infra.Exception.ValidationException;
 public class TratadorDeErros {
 
 	@ExceptionHandler(CustomDataIntegrityException.class)
-	public ResponseEntity<List<MensagemErro>> tratarBuscar(CustomDataIntegrityException ex) {
+	public ResponseEntity<MensagemErro> tratarBuscar(CustomDataIntegrityException ex) {
 		MensagemErro mensagemErro = new MensagemErro(ex.getMessage());
-		return ResponseEntity.badRequest().body(List.of(mensagemErro));
+		return ResponseEntity.badRequest().body(mensagemErro);
 	}
 
     @ExceptionHandler(InvalidDataException.class) 
-    public ResponseEntity<List<MensagemErro>> tratarDadosInvalidos(InvalidDataException ex) {
+    public ResponseEntity<MensagemErro> tratarDadosInvalidos(InvalidDataException ex) {
 		MensagemErro mensagemErro = new MensagemErro(ex.getMessage());
-        return ResponseEntity.badRequest().body(List.of(mensagemErro));
+        return ResponseEntity.badRequest().body(mensagemErro);
     }
     
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<List<DadosErroValidacao>> tratarErro400(MethodArgumentNotValidException ex) {
-        var erros = ex.getFieldErrors();
-        return ResponseEntity.badRequest().body(erros.stream().map(DadosErroValidacao::new).toList());
+    public ResponseEntity<DadosErroValidacao> tratarErro400(MethodArgumentNotValidException ex) {
+        var primeiroErro = ex.getFieldErrors().stream()
+                .findFirst() 
+                .map(DadosErroValidacao::new) 
+                .orElse(new DadosErroValidacao("Erro de validação não especificado", null)); 
+        return ResponseEntity.badRequest().body(primeiroErro);
     }
     
     public record DadosErroValidacao(String campo, String mensagem) {
@@ -40,9 +42,9 @@ public class TratadorDeErros {
     }
         
 	@ExceptionHandler(ValidationException.class)
-	public ResponseEntity<List<MensagemErro>> tratarValidacao(ValidationException ex) {
+	public ResponseEntity<MensagemErro> tratarValidacao(ValidationException ex) {
 		MensagemErro mensagemErro = new MensagemErro(ex.getMessage());
-		return ResponseEntity.badRequest().body(List.of(mensagemErro));
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(mensagemErro);
 	}
 
 	public record MensagemErro(String mensagem) {

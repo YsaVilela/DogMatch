@@ -13,6 +13,7 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 
 import br.com.dogmatch.apiprincipal.Entity.Usuario;
+import br.com.dogmatch.apiprincipal.infra.Exception.ValidationException;
 
 @Service
 public class TokenService {
@@ -26,6 +27,7 @@ public class TokenService {
 	                    .withIssuer("DogMatch")
 	                    .withSubject(usuario.getLogin())
 	                    .withExpiresAt(dataExpiracao())
+	                    .withClaim("isUsuario", usuario.getTutor().getId())
 	                    .sign(algoritmo);
 	        } catch (JWTCreationException exception){
 	            throw new RuntimeException("Erro ao gerar token jwt", exception);
@@ -45,7 +47,7 @@ public class TokenService {
 	                    .verify(tokenJWT)
 	                    .getSubject();
 	        } catch (JWTVerificationException exception) {
-	            throw new RuntimeException("Token JWT inválido ou expirado!");
+	            throw new ValidationException("Token JWT inválido ou expirado!");
 	        }
 	    }
 

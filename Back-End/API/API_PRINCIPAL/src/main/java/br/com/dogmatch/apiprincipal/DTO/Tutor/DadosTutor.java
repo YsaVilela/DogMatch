@@ -32,7 +32,6 @@ public record DadosTutor(
 		String telefone,
 		
 		@NotBlank(message = "Senha é obrigatório") 
-		@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-zA-Z]).{8,}$", message = "Senha inválida, deve conter pelo menos 8 digitos, números e carcteres.") 
 		String senha,
 
 		@Valid  

@@ -26,7 +26,7 @@ insert into TB_ESTADO (ID,NOME,UF)
 	(24,'São Paulo','SP'),
 	(25,'Paraná','PR'),
 	(26,'Rio Grande do Sul','RS'),
-	(27,'Santa Catarina','SC')
+	(27,'Santa Catarina','SC');
 
 	
 insert into TB_CIDADE (FK_ESTADO,NOME)
@@ -5600,5 +5600,5 @@ insert into TB_CIDADE (FK_ESTADO,NOME)
 	(18,'Vicentinópolis'),
 	(18,'Vila Boa'),
 	(18,'Vila Propício'),
-	(17,'Brasília')
+	(17,'Brasília');
 
