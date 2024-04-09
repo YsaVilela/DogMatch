@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.dogmatch.apidominio.DTO.DadosCidade;
 import br.com.dogmatch.apidominio.repository.CidadeRepository;
 
-
 @RestController
 @RequestMapping ("cidades")
 @CrossOrigin(origins = "*", maxAge = 3600)
