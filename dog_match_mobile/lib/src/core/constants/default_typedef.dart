@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:dog_match_mobile/src/core/http_client/rest_client.dart';
+import 'package:dog_match_mobile/src/core/error/failure.dart';
 
-typedef EitherHttpResponse = Either<Exception, HttpResponse>;
+typedef FutureEitherExceptionString = Future<Either<Exception, String>>;
+typedef FutureEitherFailureString = Future<Either<Failure, String>>;
