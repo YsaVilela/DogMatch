@@ -4,21 +4,31 @@ import 'package:http/http.dart' as http;
 
 class HttpClientImp extends Equatable implements RestClient {
   @override
-  Future<HttpResponse> post(
-      String url, Map<String, String> header, body) async {
+  Future<HttpResponse> post({
+    required String url,
+    Map<String, String>? header,
+    required Map<String, dynamic> body,
+  }) async {
     final response =
         await http.post(Uri.parse(url), headers: header, body: body);
     return HttpResponse(data: response.body, statusCode: response.statusCode);
   }
 
   @override
-  Future<HttpResponse> get(String url, Map<String, String> header) async {
+  Future<HttpResponse> get({
+    required String url,
+    Map<String, String>? header,
+  }) async {
     final response = await http.get(Uri.parse(url), headers: header);
     return HttpResponse(data: response.body, statusCode: response.statusCode);
   }
 
   @override
-  Future<HttpResponse> put(String url, Map<String, String> header, body) async {
+  Future<HttpResponse> put({
+    required String url,
+    Map<String, String>? header,
+    required Map<String, dynamic> body,
+  }) async {
     final response =
         await http.put(Uri.parse(url), headers: header, body: body);
     return HttpResponse(data: response.body, statusCode: response.statusCode);

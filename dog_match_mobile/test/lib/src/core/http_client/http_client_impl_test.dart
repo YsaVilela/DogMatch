@@ -15,39 +15,52 @@ void main() {
     "validar retorno http client método post",
     () async {
       when(
-        () => restClient.post(any(), any(), any()),
+        () => restClient.post(
+          url: any(named: 'url'),
+          header: any(named: 'header'),
+          body: any(named: 'body'),
+        ),
       ).thenAnswer(
-        (_) async => HttpResponse(data: '', statusCode: 200),
+        (_) async => const HttpResponse(data: '', statusCode: 200),
       );
 
       final result = await restClient.post(
-        'www.google.com',
-        {"token": "kaismck29am2"},
-        {"teste": "teste"},
+        url: 'www.google.com',
+        header: {"token": "kaismck29am2"},
+        body: {"teste": "teste"},
       );
 
       expect(result, isA<HttpResponse>());
-      verify(() => restClient.post(any(), any(), any())).called(1);
+      verify(() => restClient.post(
+          url: any(named: 'url'),
+          header: any(named: 'header'),
+          body: any(named: 'body'))).called(1);
     },
   );
   test(
     "validar retorno http client método post",
     () async {
       when(
-        () => restClient.post(any(), any(), any()),
+        () => restClient.post(
+            url: any(named: 'url'),
+            header: any(named: 'header'),
+            body: any(named: 'body')),
       ).thenAnswer(
-        (_) async => HttpResponse(data: '', statusCode: 400),
+        (_) async => const HttpResponse(data: '', statusCode: 400),
       );
 
       final result = await restClient.post(
-        'www.google.com',
-        {"token": "kaismck29am2"},
-        {"teste": "teste"},
+        url: 'www.google.com',
+        header: {"token": "kaismck29am2"},
+        body: {"teste": "teste"},
       );
 
       expect(result, isA<HttpResponse>());
       expect(result.statusCode, 400);
-      verify(() => restClient.post(any(), any(), any())).called(1);
+      verify(() => restClient.post(
+          url: any(named: 'url'),
+          header: any(named: 'header'),
+          body: any(named: 'body'))).called(1);
     },
   );
 }
