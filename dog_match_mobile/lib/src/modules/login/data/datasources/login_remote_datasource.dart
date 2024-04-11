@@ -21,7 +21,8 @@ class LoginRemoteDatasourceImpl extends LoginRemoteDatasource {
     final response = await _restClient.post(url: '', body: map);
 
     if (response.statusCode >= 200 && response.statusCode < 300) {
-      return Right(jsonDecode(response.data['message']));
+      final map = jsonDecode(response.data);
+      return Right(map['token']);
     }
 
     return Left(throwExceptionByResponse(response));

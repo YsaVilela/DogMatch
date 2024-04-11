@@ -3,6 +3,8 @@ import 'package:dog_match_mobile/src/core/http_client/rest_client.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../fixtures/fixtures.dart';
+
 class HttpClientImplMock extends Mock implements HttpClientImp {}
 
 void main() {
@@ -12,7 +14,7 @@ void main() {
   });
 
   test(
-    "validar retorno http client método post",
+    "validar retorno http client método post em caso de sucesso",
     () async {
       when(
         () => restClient.post(
@@ -21,7 +23,8 @@ void main() {
           body: any(named: 'body'),
         ),
       ).thenAnswer(
-        (_) async => const HttpResponse(data: '', statusCode: 200),
+        (_) async => HttpResponse(
+            data: fixture('token_response_json_mock.json'), statusCode: 200),
       );
 
       final result = await restClient.post(
@@ -31,6 +34,8 @@ void main() {
       );
 
       expect(result, isA<HttpResponse>());
+      expect(result.statusCode, 200);
+      expect(result.data, fixture('token_response_json_mock.json'));
       verify(() => restClient.post(
           url: any(named: 'url'),
           header: any(named: 'header'),
@@ -46,7 +51,8 @@ void main() {
             header: any(named: 'header'),
             body: any(named: 'body')),
       ).thenAnswer(
-        (_) async => const HttpResponse(data: '', statusCode: 400),
+        (_) async =>
+            HttpResponse(data: fixture('error_response.json'), statusCode: 400),
       );
 
       final result = await restClient.post(
@@ -57,6 +63,7 @@ void main() {
 
       expect(result, isA<HttpResponse>());
       expect(result.statusCode, 400);
+      expect(result.data, fixture('error_response.json'));
       verify(() => restClient.post(
           url: any(named: 'url'),
           header: any(named: 'header'),

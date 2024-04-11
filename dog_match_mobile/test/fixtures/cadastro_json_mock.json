@@ -5,7 +5,7 @@
     "genero": "Feminino",
     "cpf": "146.471.315-48",
     "telefone": "(11)97721-1298",
-    "email": "ysa.vi.l.silva@hotmail.com.br",
+    "email": "emailvalido@hotmail.com.br",
     "endereco": {
       "cep": "05727-100",
       "logradouro": "Rua Banofe",
@@ -13,8 +13,8 @@
       "complemento": "",
       "bairro": "Jardim Santa Bananinha",
       "cidade": "São Paulo",
-      "UF": "SP"
+      "uf": "SP"
     },
-    "senha": "A1234567"
+    "senha": "A12345679*"
   }
   

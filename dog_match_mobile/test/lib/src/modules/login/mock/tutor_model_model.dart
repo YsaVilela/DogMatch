@@ -1,7 +1,7 @@
-import 'package:dog_match_mobile/src/modules/login/domain/entities/endereco_entity.dart';
-import 'package:dog_match_mobile/src/modules/login/domain/entities/tutor_entity.dart';
+import 'package:dog_match_mobile/src/modules/login/data/models/endereco_model.dart';
+import 'package:dog_match_mobile/src/modules/login/data/models/tutor_model.dart';
 
-TutorEntity tutorEntityMock = const TutorEntity(
+TutorModel tutorModelMock = const TutorModel(
   nome: "Ysadora",
   sobrenome: "Vilela",
   dataDeNascimento: "04/11/2004",
@@ -9,8 +9,7 @@ TutorEntity tutorEntityMock = const TutorEntity(
   cpf: "146.471.315-48",
   telefone: "(11)97721-1298",
   email: "emailvalido@hotmail.com.br",
-  senha: "A12345679*",
-  endereco: EnderecoEntity(
+  endereco: EnderecoModel(
     cep: "05727-100",
     logradouro: "Rua Banofe",
     numero: "168",
@@ -19,4 +18,5 @@ TutorEntity tutorEntityMock = const TutorEntity(
     cidade: 'São Paulo',
     uf: "SP",
   ),
+  senha: "A12345679*",
 );

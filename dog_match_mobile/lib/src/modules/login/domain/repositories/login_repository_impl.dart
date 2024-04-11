@@ -1,3 +1,4 @@
+import 'package:dog_match_mobile/src/modules/login/domain/entities/tutor_entity.dart';
 import 'package:dog_match_mobile/src/modules/login/imports/login_imports.dart';
 
 class LoginRepositoryImpl extends LoginRepository {
@@ -8,7 +9,7 @@ class LoginRepositoryImpl extends LoginRepository {
   }
 
   @override
-  FutureEitherFailureString cadastrarUsuario(tutorEntity) async {
+  FutureEitherFailureString cadastrarUsuario(TutorEntity tutorEntity) async {
     try {
       final TutorModel tutorModel = TutorModel.fromEntity(tutorEntity);
 
@@ -17,14 +18,12 @@ class LoginRepositoryImpl extends LoginRepository {
       );
 
       return result.fold(
-        (exception) => throw exception,
-        (success) => Right(success),
-      );
+          (exception) => throw exception, (success) => Right(success));
     } on UserHttpStatusException catch (e) {
-      var errorResponse = ErrorResponse.fromMap(jsonDecode(e.response.data));
+      var errorResponse = ErrorResponse.fromMap(e.response.data);
       return Left(GenericFailure(errorMessage: errorResponse.errorMessage));
     } on ServerHttpStatusException catch (e) {
-      var errorResponse = ErrorResponse.fromMap(jsonDecode(e.response.data));
+      var errorResponse = ErrorResponse.fromMap(e.response.data);
       return Left(GenericFailure(errorMessage: errorResponse.errorMessage));
     } on SocketException catch (_) {
       return Left(

@@ -48,8 +48,8 @@ class TutorModel extends TutorEntity {
       TutorConstante.cpf: cpf,
       TutorConstante.telefone: telefone,
       TutorConstante.email: email,
-      TutorConstante.senha: senha,
       TutorConstante.endereco: endereco.toMap(),
+      TutorConstante.senha: senha,
     };
   }
 }
