@@ -1,31 +1,28 @@
-package br.com.dogmatch.apiprincipal.infra.Exception.tratamento;
+package br.com.dogmatch.apiemail.infra.exception.tratamento;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import br.com.dogmatch.apiprincipal.infra.Exception.CustomDataIntegrityException;
-import br.com.dogmatch.apiprincipal.infra.Exception.InvalidDataException;
-import br.com.dogmatch.apiprincipal.infra.Exception.ValidationException;
+import br.com.dogmatch.apiemail.infra.exception.InvalidDataException;
+import br.com.dogmatch.apiemail.infra.exception.InvalidEmailException;
 
 @RestControllerAdvice
 public class TratadorDeErros {
-
-	@ExceptionHandler(CustomDataIntegrityException.class)
-	public ResponseEntity<MensagemErro> tratarBuscar(CustomDataIntegrityException ex) {
+	@ExceptionHandler(InvalidEmailException.class)
+	public ResponseEntity<MensagemErro> tratarBuscar(InvalidEmailException ex) {
 		MensagemErro mensagemErro = new MensagemErro(ex.getMessage());
 		return ResponseEntity.badRequest().body(mensagemErro);
 	}
-
+	
     @ExceptionHandler(InvalidDataException.class) 
     public ResponseEntity<MensagemErro> tratarDadosInvalidos(InvalidDataException ex) {
 		MensagemErro mensagemErro = new MensagemErro(ex.getMessage());
         return ResponseEntity.badRequest().body(mensagemErro);
     }
-    
+	
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<DadosErroValidacao> tratarErro400(MethodArgumentNotValidException ex) {
         var primeiroErro = ex.getFieldErrors().stream()
@@ -40,16 +37,11 @@ public class TratadorDeErros {
             this(erro.getField(), erro.getDefaultMessage());
         } 
     }
-        
-	@ExceptionHandler(ValidationException.class)
-	public ResponseEntity<MensagemErro> tratarValidacao(ValidationException ex) {
-		MensagemErro mensagemErro = new MensagemErro(ex.getMessage());
-		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(mensagemErro);
-	}
 
 	public record MensagemErro(String mensagem) {
 		public MensagemErro(FieldError erro) {
 			this(erro.getDefaultMessage());
 		}
 	}
+	
 }

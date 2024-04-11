@@ -1,0 +1,91 @@
+{
+	"info": {
+		"_postman_id": "ff52203c-bbfa-4bfa-a128-cd9178cb1ef3",
+		"name": "Email",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29072219"
+	},
+	"item": [
+		{
+			"name": "Verificar Email",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"ysadora.vi.l.silva@hotmail.com\",\r\n    \"nome\": \"Guilherme\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_email}}/enviarEmail/verificarEmail",
+					"host": [
+						"{{url_email}}"
+					],
+					"path": [
+						"enviarEmail",
+						"verificarEmail"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Redefinir Senha",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"ysadora.vi.l.silva@hotmail.com\",\r\n    \"nome\": \"Guilherme\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_email}}/enviarEmail/redefinirSenha",
+					"host": [
+						"{{url_email}}"
+					],
+					"path": [
+						"enviarEmail",
+						"redefinirSenha"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validar Código",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"ysadora.vi.l.silva@hotmail.com\",\r\n    \"codigo\": 7690,\r\n    \"dataDeEnvio\": \"2024-04-10T23:54:48.157966400\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_email}}/enviarEmail/validarCodigo",
+					"host": [
+						"{{url_email}}"
+					],
+					"path": [
+						"enviarEmail",
+						"validarCodigo"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
