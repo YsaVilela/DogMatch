@@ -35,7 +35,7 @@ public class VerificarEmailController {
 	@PostMapping ("/verificarEmail")
     public ResponseEntity<MensagemDeSucesso> verificarEmail(@RequestBody @Valid DadosEmail dados) {
 		String to = dados.email();
-		String subject = gerarEmailService.assuntoVerificação();
+		String subject = gerarEmailService.assuntoVerificacao();
 		String body = gerarEmailService.conteudoVerificacao(dados);
 		ConteudoEmail conteudoEmail = new ConteudoEmail(to, subject, body);
 		
@@ -47,9 +47,9 @@ public class VerificarEmailController {
 		String to = dados.email();
 		String subject = gerarEmailService.assuntoRedefinirSenha();
 		String body = gerarEmailService.conteudoRedefinirSenha(dados);
-		ConteudoEmail conteudoEmail = new ConteudoEmail(to, subject, body);
+		ConteudoEmail email = new ConteudoEmail(to, subject, body);
 		
-		return ResponseEntity.status(HttpStatus.OK).body(enviarEmailService.enviarEmail(conteudoEmail));
+		return ResponseEntity.status(HttpStatus.OK).body(enviarEmailService.enviarEmail(email));
     }
 	
 	@PostMapping ("/validarCodigo")

@@ -9,20 +9,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.dogmatch.apiprincipal.DTO.Tutor.DadosTutor;
-import br.com.dogmatch.apiprincipal.Service.TutorService;
-import br.com.dogmatch.apiprincipal.infra.security.DadosTokenJWT;
+import br.com.dogmatch.apiprincipal.DTO.Mensagem;
+import br.com.dogmatch.apiprincipal.DTO.Pet.DadosPet;
+import br.com.dogmatch.apiprincipal.Service.PetService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("tutor")
+@RequestMapping("pet")
 @CrossOrigin(origins = "*", maxAge = 3600)
-public class TutorController {
+public class PetController {
+
 	@Autowired
-	private TutorService tutorService;
+	private PetService petService;
 
 	@PostMapping("cadastrar")
-	public ResponseEntity<DadosTokenJWT> cadastrar(@RequestBody @Valid DadosTutor dados) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(new DadosTokenJWT(tutorService.cadastrarTutor(dados)));
+	public ResponseEntity<Mensagem> cadastrar(@RequestBody @Valid DadosPet dados) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(new Mensagem(petService.cadastrar(dados)));
 	}
+	
+	
 }

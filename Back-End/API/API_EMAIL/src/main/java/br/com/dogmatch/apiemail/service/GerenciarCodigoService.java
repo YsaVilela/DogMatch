@@ -45,7 +45,7 @@ public class GerenciarCodigoService {
 		
 		if (!codigoAtivo) {
 			verificacaoRepository.deleteById(verificacao.get().getId());
-			throw new InvalidDataException("Código expirado.");
+			throw new InvalidDataException("Código Expirado");
 		}
 		return new MensagemDeSucesso("Email válidado com sucesso",dados.email());
 	}

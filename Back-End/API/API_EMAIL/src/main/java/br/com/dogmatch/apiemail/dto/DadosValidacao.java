@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Pattern;
 
 public record DadosValidacao(
 		@NotBlank(message = "Email é obrigatório") 
-		@Pattern(regexp = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$", message = "Email inválido") 
+		@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Email inválido") 
 		String email,
 		
 		@NotNull(message = "Codigo é obrigatório") 

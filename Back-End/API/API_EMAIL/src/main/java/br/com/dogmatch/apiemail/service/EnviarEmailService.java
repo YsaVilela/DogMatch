@@ -20,7 +20,7 @@ import br.com.dogmatch.apiemail.infra.exception.InvalidEmailException;
 @Service
 public class EnviarEmailService {
 	
-	public MensagemDeSucesso enviarEmail(ConteudoEmail conteudo) {
+	public MensagemDeSucesso enviarEmail(ConteudoEmail email) {
 
 		try {
 			Properties props = new Properties();
@@ -29,8 +29,8 @@ public class EnviarEmailService {
 			props.put("mail.smtp.auth", "true");
 			props.put("mail.smtp.starttls.enable", "true");
 
-			String username = "ysadora.vi.l.silva@gmail.com";
-			String password = "pcha gvnb nhrq gmtn";
+			String username = "DogMatch.suporte@gmail.com";
+			String password = "lypt yxhi nqjv howd";
 
 			Session session = Session.getInstance(props, new Authenticator() {
 				@Override
@@ -41,13 +41,13 @@ public class EnviarEmailService {
 
 			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(username));
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(conteudo.to()));
-			message.setSubject(conteudo.subject());
-			message.setContent(conteudo.body(), "text/html");
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email.to()));
+			message.setSubject(email.subject());
+			message.setContent(email.body(), "text/html");
 
 			Transport.send(message);
 			
-			return new MensagemDeSucesso("Email enviado com sucesso", conteudo.to());
+			return new MensagemDeSucesso("Email enviado com sucesso", email.to());
 		} catch (MessagingException e) {
 			throw new InvalidEmailException("Não foi possivel enviar o email.");
 		}

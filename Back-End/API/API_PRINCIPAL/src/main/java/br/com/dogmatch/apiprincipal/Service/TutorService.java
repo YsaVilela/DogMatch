@@ -1,17 +1,13 @@
 package br.com.dogmatch.apiprincipal.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import br.com.dogmatch.apiprincipal.DTO.Tutor.DadosDetalhamentoTutor;
 import br.com.dogmatch.apiprincipal.DTO.Tutor.DadosTutor;
 import br.com.dogmatch.apiprincipal.Entity.Endereco;
 import br.com.dogmatch.apiprincipal.Entity.Tutor;
@@ -20,7 +16,6 @@ import br.com.dogmatch.apiprincipal.Repository.EnderecoRepository;
 import br.com.dogmatch.apiprincipal.Repository.TutorRepository;
 import br.com.dogmatch.apiprincipal.Repository.UsuarioRepository;
 import br.com.dogmatch.apiprincipal.Service.validacoes.tutor.ValidadorTutor;
-import br.com.dogmatch.apiprincipal.infra.security.DadosTokenJWT;
 import br.com.dogmatch.apiprincipal.infra.security.TokenService;
 
 @Service
