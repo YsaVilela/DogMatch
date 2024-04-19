@@ -29,15 +29,15 @@ public class LoginController {
 	
 	@Autowired
 	private TokenService tokenService;
-   
+	   
 	@PostMapping
 	public ResponseEntity<DadosTokenJWT> efetuarLogin(@RequestBody @Valid DadosLogin dados) {
 		try {
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
         var authentication = manager.authenticate(authenticationToken);
-
+               
         var tokenJWT = tokenService.gerarToken((Usuario) authentication.getPrincipal());
-		
+        
 		return ResponseEntity.status(HttpStatus.OK).body(new DadosTokenJWT(tokenJWT));
         } catch (AuthenticationException ex) {
             throw new ValidationException("Usuário e/ou senha incorretos.");

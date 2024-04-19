@@ -22,6 +22,7 @@ import br.com.dogmatch.apiprincipal.Repository.FotoRepository;
 import br.com.dogmatch.apiprincipal.Repository.PedigreeRepository;
 import br.com.dogmatch.apiprincipal.Repository.PetRepository;
 import br.com.dogmatch.apiprincipal.Repository.TutorRepository;
+import br.com.dogmatch.apiprincipal.infra.Exception.EntityDisabledException;
 import br.com.dogmatch.apiprincipal.infra.Exception.NotFoundException;
 import br.com.dogmatch.apiprincipal.infra.utils.CalcularDistancia;
 import jakarta.validation.Valid;
@@ -73,6 +74,7 @@ public class PetService {
 
 	public String cadastrarPedigree(DadosPedigree dados) {
 		Pet pet = petRepository.getReferenceById(dados.idPet());
+		
 //		String linkPedigree = armazenarFotoService.armzenar(dados.foto(), pet.getNome() + LocalDateTime.now());
 
 		Pedigree pedigree = new Pedigree();

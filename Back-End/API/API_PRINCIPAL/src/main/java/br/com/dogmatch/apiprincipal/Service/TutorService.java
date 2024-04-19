@@ -1,6 +1,7 @@
 package br.com.dogmatch.apiprincipal.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,6 +21,8 @@ import br.com.dogmatch.apiprincipal.Repository.EnderecoRepository;
 import br.com.dogmatch.apiprincipal.Repository.TutorRepository;
 import br.com.dogmatch.apiprincipal.Repository.UsuarioRepository;
 import br.com.dogmatch.apiprincipal.Service.validacoes.tutor.ValidadorTutor;
+import br.com.dogmatch.apiprincipal.infra.Exception.EntityDisabledException;
+import br.com.dogmatch.apiprincipal.infra.Exception.NotFoundException;
 import br.com.dogmatch.apiprincipal.infra.security.TokenService;
 import jakarta.validation.Valid;
 
@@ -91,8 +94,17 @@ public class TutorService {
 	}
 
 	public DadosIniciaisTutor buscarDadosInicias(Long tutorId) {
-		Tutor tutor = tutorRepository.getReferenceById(tutorId);
-		DadosDetalhamentoTutor dadosDetalhamentoTutor = new DadosDetalhamentoTutor(tutor);
+		Optional<Tutor> tutor = tutorRepository.findById(tutorId);
+		
+		if(tutor.isEmpty()) {
+			throw new NotFoundException("Tutor não encontrado");
+		}
+		
+		if(!tutor.get().isStatus()) {
+			throw new EntityDisabledException("Tutor desativado");
+		}
+		
+		DadosDetalhamentoTutor dadosDetalhamentoTutor = new DadosDetalhamentoTutor(tutor.get());
 		List<DadosIniciasCompletosPet> pets = petService.buscarDadadosIniciais(tutorId);
 
 		return new DadosIniciaisTutor(dadosDetalhamentoTutor, pets);
@@ -150,6 +162,16 @@ public class TutorService {
 		tutorRepository.save(tutor);
 
 		return "Tutor Ativado com Sucesso!";
+	}
+	
+	public boolean verificarTutorAtivo(String email) {
+		Optional<Tutor> tutor = tutorRepository.findByEmail(email); 
+
+		if(tutor.isEmpty()) {
+			throw new NotFoundException("Tutor não encontrado");
+		}
+		
+		return tutor.get().isStatus();
 	}
 	
 
