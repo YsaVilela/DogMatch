@@ -23,7 +23,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nome\": \"Ysadora\",\r\n    \"sobrenome\": \"Vilela\",\r\n    \"dataDeNascimento\": \"04/11/2004\",\r\n    \"genero\": \"Feminino\",\r\n    \"cpf\": \"565.216.108-64\",\r\n    \"telefone\": \"(11)97721-5008\",\r\n    \"email\": \"ysa@hotmail.com.br\",\r\n    \"endereco\": {\r\n        \"cep\": \"05819-060\",\r\n        \"logradouro\": \"Rua Monforte da Beira\",\r\n        \"numero\": \"168\",\r\n        \"complemento\": \"\",\r\n        \"bairro\": \"Jardim Santa Josefina\",\r\n        \"cidade\": \"São Paulo\",\r\n        \"uf\": \"SP\"\r\n    },\r\n    \"senha\":\"1234567A\"\r\n}",
+					"raw": "{\r\n    \"nome\": \"Guilherme\",\r\n    \"sobrenome\": \"Vilela\",\r\n    \"dataDeNascimento\": \"04/11/2004\",\r\n    \"genero\": \"Feminino\",\r\n    \"cpf\": \"834.057.300-40\",\r\n    \"telefone\": \"(11)97721-5078\",\r\n    \"email\": \"gui@hotmail.com.br\",\r\n    \"endereco\": {\r\n        \"cep\": \"05281-110\",\r\n        \"logradouro\": \"Rua Monforte da Beira\",\r\n        \"numero\": \"168\",\r\n        \"complemento\": \"\",\r\n        \"bairro\": \"Jardim Santa Josefina\",\r\n        \"cidade\": \"São Paulo\",\r\n        \"uf\": \"SP\"\r\n    },\r\n    \"senha\":\"1234567A\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -31,18 +31,164 @@
 					}
 				},
 				"url": {
-					"raw": "http://192.168.15.189:8080/tutor/cadastrar",
-					"protocol": "http",
+					"raw": "{{url_principal}}/tutor/cadastrar",
 					"host": [
-						"192",
-						"168",
-						"15",
-						"189"
+						"{{url_principal}}"
 					],
-					"port": "8080",
 					"path": [
 						"tutor",
 						"cadastrar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Dados Iniciais",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_principal}}/tutor/dados",
+					"host": [
+						"{{url_principal}}"
+					],
+					"path": [
+						"tutor",
+						"dados"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Tutor",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Ysadora\",\r\n        \"sobrenome\": \"Vilela\",\r\n        \"dataDeNascimento\": \"04/11/2004\",\r\n        \"genero\": \"Feminino\",\r\n        \"cpf\": \"563.307.930-26\",\r\n        \"email\": \"ysa@hotmail.com.br\",\r\n        \"telefone\": \"(11)97721-5018\",\r\n        \"endereco\": {\r\n            \"id\": 2,\r\n            \"cep\": \"05281-110\",\r\n            \"logradouro\": \"Rua Monforte da Beira\",\r\n            \"numero\": 168,\r\n            \"complemento\": \"\",\r\n            \"bairro\": \"Jardim Santa Josefina\",\r\n            \"cidade\": \"São Paulo\",\r\n            \"uf\": \"SP\"\r\n        }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_principal}}/tutor/atualizar",
+					"host": [
+						"{{url_principal}}"
+					],
+					"path": [
+						"tutor",
+						"atualizar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Desativar Tutor",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_principal}}/tutor/desativar",
+					"host": [
+						"{{url_principal}}"
+					],
+					"path": [
+						"tutor",
+						"desativar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ativar Tutor",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Ysadora\",\r\n        \"sobrenome\": \"Vilela\",\r\n        \"dataDeNascimento\": \"04/11/2004\",\r\n        \"genero\": \"Feminino\",\r\n        \"cpf\": \"563.307.930-26\",\r\n        \"email\": \"ysa@hotmail.com.br\",\r\n        \"telefone\": \"(11)97721-5018\",\r\n        \"endereco\": {\r\n            \"id\": 2,\r\n            \"cep\": \"05281-110\",\r\n            \"logradouro\": \"Rua Monforte da Beira\",\r\n            \"numero\": 168,\r\n            \"complemento\": \"\",\r\n            \"bairro\": \"Jardim Santa Josefina\",\r\n            \"cidade\": \"São Paulo\",\r\n            \"uf\": \"SP\"\r\n        }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_principal}}/tutor/ativar",
+					"host": [
+						"{{url_principal}}"
+					],
+					"path": [
+						"tutor",
+						"ativar"
 					]
 				}
 			},

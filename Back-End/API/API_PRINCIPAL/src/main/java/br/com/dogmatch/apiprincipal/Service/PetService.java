@@ -2,6 +2,7 @@ package br.com.dogmatch.apiprincipal.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ import br.com.dogmatch.apiprincipal.Repository.FotoRepository;
 import br.com.dogmatch.apiprincipal.Repository.PedigreeRepository;
 import br.com.dogmatch.apiprincipal.Repository.PetRepository;
 import br.com.dogmatch.apiprincipal.Repository.TutorRepository;
+import br.com.dogmatch.apiprincipal.infra.Exception.NotFoundException;
 import br.com.dogmatch.apiprincipal.infra.utils.CalcularDistancia;
 import jakarta.validation.Valid;
 
@@ -94,10 +96,14 @@ public class PetService {
 		return null;
 	}
 	
-	public String atualizarPedigree(Long idPet, DadosPedigree dados) {
-		Pedigree pedigree = pedigreeRepository.findByPetId(idPet);
-//		String linkPedigree = armazenarFotoService.armzenar(dados.foto(), pet.getNome() + LocalDateTime.now());
+	public String atualizarPedigree(DadosPedigree dados) {
+		Pedigree pedigree = pedigreeRepository.findByPetId(dados.idPet());
 
+		if(pedigree == null) {
+			throw new NotFoundException("Pedigree não encontrado");
+		}
+		
+//		String linkPedigree = armazenarFotoService.armzenar(dados.foto(), pet.getNome() + LocalDateTime.now());
 		pedigree.setRg(dados.rg());
 		pedigree.setDataDeEmissao(dados.dataDeEmissao());
 		pedigree.setFotoPedigree("linkPedigree");
@@ -109,7 +115,11 @@ public class PetService {
 	
 	public String deletarPedigree(Long idPet) {
 		Pedigree pedigree = pedigreeRepository.findByPetId(idPet);
-
+		
+		if(pedigree == null) {
+			throw new NotFoundException("Pedigree não encontrado");
+		}
+		
 		pedigreeRepository.delete(pedigree);
 
 		return "Pedigree Deletado com Sucesso!";
@@ -144,9 +154,7 @@ public class PetService {
 	}
 		
 	public String deletarFoto(Long idFoto) {
-		Foto foto = fotoRepository.getReferenceById(idFoto);
-
-		fotoRepository.delete(foto);
+		fotoRepository.deleteById(idFoto);
 
 		return "Foto Deletada com Sucesso!";
 	}

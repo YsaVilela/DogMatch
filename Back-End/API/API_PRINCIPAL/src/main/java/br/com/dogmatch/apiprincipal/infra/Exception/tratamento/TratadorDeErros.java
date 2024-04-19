@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import br.com.dogmatch.apiprincipal.infra.Exception.CustomDataIntegrityException;
 import br.com.dogmatch.apiprincipal.infra.Exception.InvalidDataException;
+import br.com.dogmatch.apiprincipal.infra.Exception.NotFoundException;
 import br.com.dogmatch.apiprincipal.infra.Exception.StorageException;
 import br.com.dogmatch.apiprincipal.infra.Exception.ValidationException;
 
@@ -26,7 +27,13 @@ public class TratadorDeErros {
 		MensagemErro mensagemErro = new MensagemErro(ex.getMessage());
 		return ResponseEntity.badRequest().body(mensagemErro);
 	}
-
+ 
+	@ExceptionHandler(NotFoundException.class)
+	public ResponseEntity<MensagemErro> tratarBuscar(NotFoundException ex) {
+		MensagemErro mensagemErro = new MensagemErro(ex.getMessage());
+		return ResponseEntity.badRequest().body(mensagemErro);
+	}
+	
     @ExceptionHandler(InvalidDataException.class) 
     public ResponseEntity<MensagemErro> tratarDadosInvalidos(InvalidDataException ex) {
 		MensagemErro mensagemErro = new MensagemErro(ex.getMessage());

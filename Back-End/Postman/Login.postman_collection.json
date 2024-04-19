@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"login\": \"ysa.vi.l@hotmail.com.br\",\r\n    \"senha\": \"1234567A\"\r\n}",
+					"raw": "{\r\n    \"login\": \"gui@hotmail.com.br\",\r\n    \"senha\": \"1234567A\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

@@ -149,7 +149,7 @@ public class TutorService {
 		tutor.setStatus(true);
 		tutorRepository.save(tutor);
 
-		return "Tutor Desativado com Sucesso!";
+		return "Tutor Ativado com Sucesso!";
 	}
 	
 

@@ -33,7 +33,7 @@ public class TutorController {
 	}
 	
 	@GetMapping("dados")
-	public ResponseEntity<DadosIniciaisTutor> buscarDados(HttpServletRequest request) {
+	public ResponseEntity<DadosIniciaisTutor> buscarDadosIniciais(HttpServletRequest request) {
 		Long tutorId = (Long) request.getAttribute("idUsuario");		
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(tutorService.buscarDadosInicias(tutorId));
