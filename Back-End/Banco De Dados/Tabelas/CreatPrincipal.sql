@@ -46,7 +46,7 @@ create table TB_PET(
 create table TB_PEDIGREE(
 	ID serial primary key,
 	RG varchar (12) not null,	
-	DATA_NASCIMENTO varchar (10) not null,
+	DATA_EMISSAO varchar (10) not null,
 	DOCUMENTO text not null,
 	FK_PET integer not null,
 		foreign key (FK_PET)

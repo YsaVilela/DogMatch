@@ -1,7 +1,5 @@
 package br.com.dogmatch.apiprincipal.Service.validacoes.tutor;
 
-import br.com.dogmatch.apiprincipal.DTO.Tutor.DadosTutor;
-
 public interface ValidadorTutor {
-	void validar (DadosTutor tutor);
+	void validar (String cpf, String email, String dataDeNascimento, Long id);
 }

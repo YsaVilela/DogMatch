@@ -1,4 +1,4 @@
-package br.com.dogmatch.apiprincipal.DTO.Pet;
+package br.com.dogmatch.apiprincipal.DTO.Pet.Pedigree;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

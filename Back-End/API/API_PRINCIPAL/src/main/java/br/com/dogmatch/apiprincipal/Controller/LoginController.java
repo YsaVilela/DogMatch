@@ -43,5 +43,4 @@ public class LoginController {
             throw new ValidationException("Usuário e/ou senha incorretos.");
         }
 	}
-	
 }

@@ -6,18 +6,17 @@ import java.time.format.DateTimeFormatter;
 
 import org.springframework.stereotype.Component;
 
-import br.com.dogmatch.apiprincipal.DTO.Tutor.DadosTutor;
 import br.com.dogmatch.apiprincipal.infra.Exception.InvalidDataException;
 
 @Component
 public class ValidadorIdade implements ValidadorTutor{
 
 	@Override
-	public void validar(DadosTutor tutor) {
+	public void validar(String cpf, String email, String dataDeNascimento, Long id) {
 		LocalDate dataAtual = LocalDate.now();
 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDate dataNascimento = LocalDate.parse(tutor.dataDeNascimento(), formatter);
+		LocalDate dataNascimento = LocalDate.parse(dataDeNascimento, formatter);
 
 		Period periodo = Period.between(dataNascimento, dataAtual);
 		int diferencaEmAnos = periodo.getYears();

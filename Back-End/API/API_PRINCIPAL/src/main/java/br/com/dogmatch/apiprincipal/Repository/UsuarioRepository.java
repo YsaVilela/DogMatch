@@ -15,5 +15,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Long>{
 	void deleteAllAndResetSequence();
 
 	UserDetails findByLogin(String login);
+
+	Usuario findByTutorId(Long tutorId);
 	
 }

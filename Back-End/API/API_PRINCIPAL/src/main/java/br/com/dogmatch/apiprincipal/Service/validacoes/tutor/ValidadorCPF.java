@@ -2,15 +2,14 @@ package br.com.dogmatch.apiprincipal.Service.validacoes.tutor;
 
 import org.springframework.stereotype.Component;
 
-import br.com.dogmatch.apiprincipal.DTO.Tutor.DadosTutor;
 import br.com.dogmatch.apiprincipal.infra.Exception.InvalidDataException;
 
 @Component
 public class ValidadorCPF implements ValidadorTutor{
 
 	@Override
-	public void validar(DadosTutor tutor) {
-		boolean aprovado = isCpf(tutor.cpf());
+	public void validar(String cpf, String email, String dataDeNascimento, Long id) {
+		boolean aprovado = isCpf(cpf);
 		if (!aprovado) {
 			throw new InvalidDataException ("Número de cpf inválido");
 		}

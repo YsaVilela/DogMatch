@@ -76,13 +76,10 @@
 			<version>2.36.1</version>
 		</dependency>
 
-
-<!--apagar depois-->
 		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.11.0</version> <!-- Versão mais recente do Apache Commons
-			IO -->
+			<groupId>com.google.maps</groupId>
+			<artifactId>google-maps-services</artifactId>
+			<version>0.14.0</version>
 		</dependency>
 
 	</dependencies>
