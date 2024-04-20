@@ -37,9 +37,5 @@ public record DadosPet(
 		String descricao,
 		
 		@NotBlank(message = "Interesse é obrigatório")
-		String interesse,
-		
-		@NotNull(message = "Tutor é obrigatório")
-		Long idTutor) {
-
+		String interesse) {
 }

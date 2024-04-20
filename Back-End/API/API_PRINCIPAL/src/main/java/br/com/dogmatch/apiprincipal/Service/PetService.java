@@ -7,8 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.dogmatch.apiprincipal.DTO.Pet.DadosFeedPet;
-import br.com.dogmatch.apiprincipal.DTO.Pet.DadosIniciasCompletosPet;
+import br.com.dogmatch.apiprincipal.DTO.Pet.DadosCompletosPet;
 import br.com.dogmatch.apiprincipal.DTO.Pet.DadosIniciasPet;
 import br.com.dogmatch.apiprincipal.DTO.Pet.DadosPet;
 import br.com.dogmatch.apiprincipal.DTO.Pet.Foto.DadosDetalhamentoFoto;
@@ -18,20 +17,19 @@ import br.com.dogmatch.apiprincipal.DTO.Pet.Pedigree.DadosPedigree;
 import br.com.dogmatch.apiprincipal.Entity.Foto;
 import br.com.dogmatch.apiprincipal.Entity.Pedigree;
 import br.com.dogmatch.apiprincipal.Entity.Pet;
+import br.com.dogmatch.apiprincipal.Entity.Tutor;
 import br.com.dogmatch.apiprincipal.Repository.FotoRepository;
 import br.com.dogmatch.apiprincipal.Repository.PedigreeRepository;
 import br.com.dogmatch.apiprincipal.Repository.PetRepository;
 import br.com.dogmatch.apiprincipal.Repository.TutorRepository;
-import br.com.dogmatch.apiprincipal.infra.Exception.EntityDisabledException;
 import br.com.dogmatch.apiprincipal.infra.Exception.NotFoundException;
-import br.com.dogmatch.apiprincipal.infra.utils.CalcularDistancia;
-import jakarta.validation.Valid;
+import br.com.dogmatch.apiprincipal.infra.utils.CalcularIdade;
 
 @Service
 public class PetService {
 
-	@Autowired
-	private ArmazenarFotoService armazenarFotoService;
+//	@Autowired
+//	private ArmazenarFotoService armazenarFotoService;
 
 	@Autowired
 	private TutorRepository tutorRepository;
@@ -44,13 +42,22 @@ public class PetService {
 
 	@Autowired
 	private FotoRepository fotoRepository;
-
+	
 	@Autowired
-	public CalcularDistancia calcularDistancia;
+	public CalcularIdade calcularIdade;
 
-	public String cadastrar(DadosPet dados) {
+	public String cadastrar(Long tutorId, DadosPet dados) {
 //		String linkFotoDePerfil = armazenarFotoService.armzenar(dados.foto(), dados.nome() + LocalDateTime.now());
 //		String linkCarteirinhaDeVacina = armazenarFotoService.armzenar(dados.foto(), dados.nome() + LocalDateTime.now());
+
+		if (calcularIdade.calcularIdade(dados.dataDeNascimento()) < 1 && dados.interesse().equals("relacionamento")) {
+			throw new NotFoundException("O Pet deve ter mais de 1 ano para ter relacionamentos");
+		}
+		
+		Optional<Tutor> tutor = tutorRepository.findById(tutorId);
+		if (tutor.isEmpty()) {
+			throw new NotFoundException("Tutor não encontrado");
+		}
 
 		Pet pet = new Pet();
 		pet.setNome(dados.nome());
@@ -64,7 +71,7 @@ public class PetService {
 		pet.setFotoDePerfil("linkCarteirinhaDeVacina");
 		pet.setDescricao(dados.descricao());
 		pet.setInteresse(dados.interesse());
-		pet.setTutor(tutorRepository.getReferenceById(dados.idTutor()));
+		pet.setTutor(tutor.get());
 		pet.setStatus(true);
 
 		petRepository.save(pet);
@@ -73,8 +80,12 @@ public class PetService {
 	}
 
 	public String cadastrarPedigree(DadosPedigree dados) {
+		if (pedigreeRepository.findByPetId(dados.idPet()) != null) {
+			throw new NotFoundException("Pet já possui pedigree cadastrado");
+		}
+
 		Pet pet = petRepository.getReferenceById(dados.idPet());
-		
+
 //		String linkPedigree = armazenarFotoService.armzenar(dados.foto(), pet.getNome() + LocalDateTime.now());
 
 		Pedigree pedigree = new Pedigree();
@@ -97,14 +108,14 @@ public class PetService {
 
 		return null;
 	}
-	
+
 	public String atualizarPedigree(DadosPedigree dados) {
 		Pedigree pedigree = pedigreeRepository.findByPetId(dados.idPet());
 
-		if(pedigree == null) {
+		if (pedigree == null) {
 			throw new NotFoundException("Pedigree não encontrado");
 		}
-		
+
 //		String linkPedigree = armazenarFotoService.armzenar(dados.foto(), pet.getNome() + LocalDateTime.now());
 		pedigree.setRg(dados.rg());
 		pedigree.setDataDeEmissao(dados.dataDeEmissao());
@@ -114,14 +125,14 @@ public class PetService {
 
 		return "Pedigree Atualizado com Sucesso!";
 	}
-	
+
 	public String deletarPedigree(Long idPet) {
 		Pedigree pedigree = pedigreeRepository.findByPetId(idPet);
-		
-		if(pedigree == null) {
+
+		if (pedigree == null) {
 			throw new NotFoundException("Pedigree não encontrado");
 		}
-		
+
 		pedigreeRepository.delete(pedigree);
 
 		return "Pedigree Deletado com Sucesso!";
@@ -154,16 +165,16 @@ public class PetService {
 		}
 		return dadosFotos;
 	}
-		
+
 	public String deletarFoto(Long idFoto) {
 		fotoRepository.deleteById(idFoto);
 
 		return "Foto Deletada com Sucesso!";
 	}
-	
+
 	public String atualizarPet(Long idPet, DadosPet dados) {
 		Pet pet = petRepository.getReferenceById(idPet);
-		
+
 		pet.setNome(dados.nome());
 		pet.setSobrenome(dados.sobrenome());
 		pet.setDataDeNascimento(dados.dataDeNascimento());
@@ -188,7 +199,7 @@ public class PetService {
 
 		return "Pet Ativado com Sucesso!";
 	}
-	
+
 	public String desativarPet(Long idPet) {
 		Pet pet = petRepository.getReferenceById(idPet);
 		pet.setStatus(false);
@@ -196,7 +207,7 @@ public class PetService {
 
 		return "Pet Desativado com Sucesso!";
 	}
-	
+
 	public void desativarTodosPetsPorTutor(Long idTutor) {
 		List<Pet> pets = petRepository.getByTutorId(idTutor);
 		for (Pet pet : pets) {
@@ -211,42 +222,33 @@ public class PetService {
 		}
 	}
 
-	public List<DadosIniciasCompletosPet> buscarDadadosIniciais(Long idTutor) {
+	public List<DadosCompletosPet> buscarDadadosIniciais(Long idTutor) {
 		List<Pet> pets = petRepository.getByTutorId(idTutor);
-		List<DadosIniciasCompletosPet> dadosIniciaisPets = new ArrayList<>();
+		List<DadosCompletosPet> dadosIniciaisPets = new ArrayList<>();
 
 		for (Pet pet : pets) {
-			DadosIniciasPet dadosIniciaisPet = new DadosIniciasPet(pet);
-			DadosDetalhamentoPedigree dadosPedigree = buscarPedigree(pet.getId());
-			List<DadosDetalhamentoFoto> dadosFotos = buscarFotos(pet.getId());
-
-			DadosIniciasCompletosPet dadosCompletosPet = new DadosIniciasCompletosPet(dadosIniciaisPet, dadosPedigree,
-					dadosFotos);
+			DadosCompletosPet dadosCompletosPet = buscarDadosPet(pet.getId());
 			dadosIniciaisPets.add(dadosCompletosPet);
 		}
 
 		return dadosIniciaisPets;
 	}
 
-	public DadosFeedPet buscarPetFeed(Long idPet, Long idPetBuscado, String localizacaoAtual) {
-		Pet petBuscado = petRepository.getReferenceById(idPetBuscado);
-		Pedigree pedigree = pedigreeRepository.findByPetId(idPetBuscado);
+	public DadosCompletosPet buscarDadosPet(Long idPet) {
+		Optional<Pet> pet = petRepository.findById(idPet);
 
-		boolean possuiPedigree = pedigree != null;
-
-		Pet pet = petRepository.getReferenceById(idPet);
-		String localizacao;
-
-		if (!localizacaoAtual.isBlank()) {
-			localizacao = localizacaoAtual;
-		} else {
-			localizacao = pet.getTutor().getEndereco().getCep();
+		if (pet.isEmpty()) {
+			throw new NotFoundException("Pet não encontrado");
 		}
 
-		String distancia = calcularDistancia.calcularDistanciaEntreCEPs(localizacao,
-				petBuscado.getTutor().getEndereco().getCep());
+		DadosIniciasPet dadosIniciaisPet = new DadosIniciasPet(pet.get());
+		DadosDetalhamentoPedigree dadosPedigree = buscarPedigree(idPet);
+		List<DadosDetalhamentoFoto> dadosFotos = buscarFotos(idPet);
 
-		return new DadosFeedPet(petBuscado, possuiPedigree, distancia);
+		return new DadosCompletosPet(dadosIniciaisPet, dadosPedigree, dadosFotos);
 	}
-	
+
+	public List<String> buscarRacas() {
+		return petRepository.findAllRacas();
+	}
 }

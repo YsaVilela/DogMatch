@@ -9,7 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import br.com.dogmatch.apiprincipal.DTO.Pet.DadosIniciasCompletosPet;
+import br.com.dogmatch.apiprincipal.DTO.Pet.DadosCompletosPet;
 import br.com.dogmatch.apiprincipal.DTO.Tutor.DadosAtualizarTutor;
 import br.com.dogmatch.apiprincipal.DTO.Tutor.DadosDetalhamentoTutor;
 import br.com.dogmatch.apiprincipal.DTO.Tutor.DadosIniciaisTutor;
@@ -105,7 +105,7 @@ public class TutorService {
 		}
 		
 		DadosDetalhamentoTutor dadosDetalhamentoTutor = new DadosDetalhamentoTutor(tutor.get());
-		List<DadosIniciasCompletosPet> pets = petService.buscarDadadosIniciais(tutorId);
+		List<DadosCompletosPet> pets = petService.buscarDadadosIniciais(tutorId);
 
 		return new DadosIniciaisTutor(dadosDetalhamentoTutor, pets);
 	}

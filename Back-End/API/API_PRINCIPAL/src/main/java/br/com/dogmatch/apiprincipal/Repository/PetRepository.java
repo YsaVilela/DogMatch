@@ -17,4 +17,10 @@ public interface PetRepository extends JpaRepository<Pet, Long> {
 
 
 	List<Pet> getByTutorId(Long idTutor);
+
+	@Query(value = "SELECT DISTINCT p.raca FROM Pet p")
+	List<String> findAllRacas();
+
+
+	List<Pet> findByStatusTrue();
 }

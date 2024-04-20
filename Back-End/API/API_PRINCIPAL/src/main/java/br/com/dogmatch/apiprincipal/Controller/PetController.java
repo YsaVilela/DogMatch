@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.dogmatch.apiprincipal.DTO.Mensagem;
+import br.com.dogmatch.apiprincipal.DTO.Pet.DadosCompletosPet;
 import br.com.dogmatch.apiprincipal.DTO.Pet.DadosPet;
 import br.com.dogmatch.apiprincipal.DTO.Pet.Foto.DadosDetalhamentoFoto;
 import br.com.dogmatch.apiprincipal.DTO.Pet.Foto.DadosFoto;
 import br.com.dogmatch.apiprincipal.DTO.Pet.Pedigree.DadosDetalhamentoPedigree;
 import br.com.dogmatch.apiprincipal.DTO.Pet.Pedigree.DadosPedigree;
 import br.com.dogmatch.apiprincipal.Service.PetService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 @RestController
@@ -33,8 +35,10 @@ public class PetController {
 	private PetService petService;
 
 	@PostMapping("cadastrar")
-	public ResponseEntity<Mensagem> cadastrarPet(@RequestBody @Valid DadosPet dados) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(new Mensagem(petService.cadastrar(dados)));
+	public ResponseEntity<Mensagem> cadastrarPet(HttpServletRequest request, @RequestBody @Valid DadosPet dados) {
+		Long tutorId = (Long) request.getAttribute("idUsuario");
+
+		return ResponseEntity.status(HttpStatus.CREATED).body(new Mensagem(petService.cadastrar(tutorId, dados)));
 	}
 	
 	@PostMapping("cadastrar/pedigree")
@@ -45,6 +49,11 @@ public class PetController {
 	@PostMapping("cadastrar/foto")
 	public ResponseEntity<Mensagem> cadastrarFoto(@RequestBody @Valid DadosFoto dados) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(new Mensagem(petService.cadastrarFoto(dados)));
+	}
+	
+	@GetMapping("buscar/pet/{idPet}")
+	public ResponseEntity<DadosCompletosPet> buscarPet(@PathVariable Long idPet) {
+		return ResponseEntity.status(HttpStatus.OK).body(petService.buscarDadosPet(idPet));
 	}
 	
 	@GetMapping("buscar/pedigree/{idPet}")
@@ -85,5 +94,10 @@ public class PetController {
 	@PutMapping("ativar/{idPet}")
 	public ResponseEntity<Mensagem> ativarPet(@PathVariable Long idPet) {
 		return ResponseEntity.status(HttpStatus.OK).body(new Mensagem(petService.ativarPet(idPet)));
+	}
+	
+	@GetMapping("listar/racas")
+	public ResponseEntity<List<String>> listarRacas() {
+		return ResponseEntity.status(HttpStatus.OK).body(petService.buscarRacas());
 	}
 }

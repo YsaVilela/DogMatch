@@ -14,6 +14,7 @@ public record DadosIniciasPet(
 		String carteiraDeVacinacao,
 		String fotoPerfil,
 		String descricao,
+		String interesse,
 		boolean status
 		) {
 	
@@ -30,6 +31,7 @@ public record DadosIniciasPet(
 			pet.getCarteiraDeVacinacao(),
 			pet.getFotoDePerfil(),
 			pet.getDescricao(),
+			pet.getInteresse(),
 			pet.isStatus()
 			);
 	}

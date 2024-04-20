@@ -9,17 +9,21 @@ public record DadosFeedPet(
 		String raca,
 		String fotoDePerfil,
 		String descricao,
+		String porte,
+		String genero,
 		boolean pedigree,
-		String distancia
+		Long distancia
 		) {
 
-	public DadosFeedPet (Pet pet, boolean pedigree, String distancia) {
+	public DadosFeedPet (Pet pet, boolean pedigree, Long distancia) {
 		this(
 			pet.getId(),
 			pet.getNome(),
 			pet.getDataDeNascimento(),
 			pet.getRaca(),
 			pet.getFotoDePerfil(),
+			pet.getPorte(),
+			pet.getGenero(),
 			pet.getDescricao(),
 			pedigree,
 			distancia);
