@@ -50,6 +50,9 @@ public class Pet {
 	@Column(name = "interesse") 
 	private String interesse;
 	
+	@Column(name = "castrado") 
+	private boolean castrado;
+	
 	@Column(name = "status") 
 	private boolean status;
 	
@@ -163,6 +166,14 @@ public class Pet {
 
 	public void setTutor(Tutor tutor) {
 		this.tutor = tutor;
+	}
+
+	public boolean getCastrado() {
+		return castrado;
+	}
+
+	public void setCastrado(boolean castrado) {
+		this.castrado = castrado;
 	}
 
 }

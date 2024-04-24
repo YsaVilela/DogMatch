@@ -18,7 +18,7 @@ create table TB_TUTOR(
 	CPF varchar (14) not null unique,
 	EMAIL varchar (255) not null unique,
 	TELEFONE varchar (14) not null,	
-	FK_ENDERECO integer not null,
+	FK_ENDERECO integer not null unique,
 		foreign key (FK_ENDERECO)
 		references TB_ENDERECO(ID),
 	STATUS boolean not null
@@ -26,6 +26,7 @@ create table TB_TUTOR(
 
 create table TB_PET(
 	ID serial primary key,
+	NOME_USUARIO varchar (100) not null unique,	
 	NOME varchar (100) not null,	
 	SOBRENOME varchar (255) not null,
 	DATA_NASCIMENTO varchar (10) not null,
@@ -37,6 +38,7 @@ create table TB_PET(
 	FOTO_PERFIL text not null,
 	DESCRICAO text not null,
 	INTERESSE varchar (20) not null,
+	CASTRADO boolean not null,
 	FK_TUTOR integer not null,
 		foreign key (FK_TUTOR)
 		references TB_TUTOR(ID),
@@ -48,7 +50,7 @@ create table TB_PEDIGREE(
 	RG varchar (12) not null,	
 	DATA_EMISSAO varchar (10) not null,
 	DOCUMENTO text not null,
-	FK_PET integer not null,
+	FK_PET integer not null unique,
 		foreign key (FK_PET)
 		references TB_PET(ID)
 );
@@ -56,8 +58,8 @@ create table TB_PEDIGREE(
 create table TB_FOTO(
 	ID serial primary key,
 	FOTO text not null,
-	LEGENDA text not null,
-	DATA_PUBLICACAO date not null,
+	LEGENDA text,
+	DATA_PUBLICACAO timestamp not null,
 	FK_PET integer not null,
 		foreign key (FK_PET)
 		references TB_PET(ID)
@@ -65,13 +67,14 @@ create table TB_FOTO(
 
 create table TB_SOLICITACAO(
 	ID serial primary key,
-	STATUS boolean not null, 
+	STATUS varchar (25) not null, 
 	FK_SOLICITANTE integer not null,
 		foreign key (FK_SOLICITANTE)
 		references TB_PET(ID),
 	FK_SOLICITADO integer not null,
 		foreign key (FK_SOLICITADO)
-		references TB_PET(ID)
+		references TB_PET(ID),
+	DATA_SOLICITACAO timestamp not null
 );
 
 create table TB_MATCH(
@@ -99,12 +102,33 @@ create table TB_MENSAGEM(
 
 create table TB_USUARIO(
 	ID serial primary key,
-	LOGIN varchar (255) not null,	
-	SENHA varchar (255) not null,
+	LOGIN varchar (255) not null unique,	
+	SENHA text not null,
 	FK_TUTOR integer not null unique,
 		foreign key (FK_TUTOR)
 		references TB_TUTOR(ID)
 );
 
-drop table TB_MENSAGEM, TB_MATCH, TB_SOLICITACAO,TB_FOTO,TB_PEDIGREE,TB_PET, TB_TUTOR, TB_ENDERECO, TB_USUARIO;
+create table TB_RECUSA(
+	ID serial primary key,
+	FK_PET_RECUSA integer not null,
+		foreign key (FK_PET_RECUSA)
+		references TB_PET(ID),
+	FK_PET_RECUSADO integer not null,
+		foreign key (FK_PET_RECUSADO)
+		references TB_PET(ID)
+);
+
+create table TB_RECUSA_PERMANENTE(
+	ID serial primary key,
+	FK_PET_RECUSA integer not null,
+		foreign key (FK_PET_RECUSA)
+		references TB_PET(ID),
+	FK_PET_RECUSADO integer not null,
+		foreign key (FK_PET_RECUSADO)
+		references TB_PET(ID)
+);
+
+drop table TB_RECUSA_PERMANENTE,TB_RECUSA,TB_MENSAGEM, TB_MATCH, TB_SOLICITACAO,TB_FOTO,TB_PEDIGREE,TB_PET, TB_TUTOR, TB_ENDERECO, TB_USUARIO;
+
 

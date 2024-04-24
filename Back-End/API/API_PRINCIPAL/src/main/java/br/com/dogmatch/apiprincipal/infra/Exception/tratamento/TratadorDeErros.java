@@ -11,6 +11,7 @@ import br.com.dogmatch.apiprincipal.infra.Exception.CustomDataIntegrityException
 import br.com.dogmatch.apiprincipal.infra.Exception.EntityDisabledException;
 import br.com.dogmatch.apiprincipal.infra.Exception.InvalidDataException;
 import br.com.dogmatch.apiprincipal.infra.Exception.NotFoundException;
+import br.com.dogmatch.apiprincipal.infra.Exception.ProcessInvalidException;
 import br.com.dogmatch.apiprincipal.infra.Exception.StorageException;
 import br.com.dogmatch.apiprincipal.infra.Exception.ValidationException;
 
@@ -37,6 +38,12 @@ public class TratadorDeErros {
 	
 	@ExceptionHandler(EntityDisabledException.class)
 	public ResponseEntity<MensagemErro> tratarBuscar(EntityDisabledException ex) {
+		MensagemErro mensagemErro = new MensagemErro(ex.getMessage());
+		return ResponseEntity.badRequest().body(mensagemErro);
+	}
+	
+	@ExceptionHandler(ProcessInvalidException.class)
+	public ResponseEntity<MensagemErro> tratarBuscar(ProcessInvalidException ex) {
 		MensagemErro mensagemErro = new MensagemErro(ex.getMessage());
 		return ResponseEntity.badRequest().body(mensagemErro);
 	}

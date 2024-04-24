@@ -34,18 +34,287 @@
 					}
 				},
 				"url": {
-					"raw": "{{url_principal}}/feed/5?localizacaoAtual=-25.53144668217674, -49.38374627454867",
+					"raw": "{{url_principal}}/feed?idPet=1&idadeMinima=2&idadeMaxima=20&possuiPedigree=false&castrado=true",
+					"host": [
+						"{{url_principal}}"
+					],
+					"path": [
+						"feed"
+					],
+					"query": [
+						{
+							"key": "idPet",
+							"value": "1"
+						},
+						{
+							"key": "localizacaoAtual",
+							"value": "-25.53144668217674, -49.38374627454867",
+							"disabled": true
+						},
+						{
+							"key": "distanciaMaxima",
+							"value": "425000",
+							"disabled": true
+						},
+						{
+							"key": "idadeMinima",
+							"value": "2"
+						},
+						{
+							"key": "idadeMaxima",
+							"value": "20"
+						},
+						{
+							"key": "raca",
+							"value": "Maltês",
+							"disabled": true
+						},
+						{
+							"key": "possuiPedigree",
+							"value": "false"
+						},
+						{
+							"key": "porte",
+							"value": "Medio",
+							"disabled": true
+						},
+						{
+							"key": "castrado",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Solicitar pet",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_principal}}/feed/solicitacao?idPet=9&idPetSolicitado=1",
 					"host": [
 						"{{url_principal}}"
 					],
 					"path": [
 						"feed",
-						"5"
+						"solicitacao"
 					],
 					"query": [
 						{
-							"key": "localizacaoAtual",
-							"value": "-25.53144668217674, -49.38374627454867"
+							"key": "idPet",
+							"value": "9"
+						},
+						{
+							"key": "idPetSolicitado",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Recusar Pet",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_principal}}/feed/recusa?idPet=8&idPetRecusado=10",
+					"host": [
+						"{{url_principal}}"
+					],
+					"path": [
+						"feed",
+						"recusa"
+					],
+					"query": [
+						{
+							"key": "idPet",
+							"value": "8"
+						},
+						{
+							"key": "idPetRecusado",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Recusar Pet Copy",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_principal}}/feed/recusa?idPet=8&idPetRecusado=10",
+					"host": [
+						"{{url_principal}}"
+					],
+					"path": [
+						"feed",
+						"recusa"
+					],
+					"query": [
+						{
+							"key": "idPet",
+							"value": "8"
+						},
+						{
+							"key": "idPetRecusado",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Recusar Solicitação",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_principal}}/feed/recusarSolicitacao?idPet=1&idPetSolicitante=9",
+					"host": [
+						"{{url_principal}}"
+					],
+					"path": [
+						"feed",
+						"recusarSolicitacao"
+					],
+					"query": [
+						{
+							"key": "idPet",
+							"value": "1"
+						},
+						{
+							"key": "idPetSolicitante",
+							"value": "9"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Solicitações Recebidas",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_principal}}/feed/buscarSolicitacoes?idPet=1",
+					"host": [
+						"{{url_principal}}"
+					],
+					"path": [
+						"feed",
+						"buscarSolicitacoes"
+					],
+					"query": [
+						{
+							"key": "idPet",
+							"value": "1"
 						}
 					]
 				}

@@ -14,7 +14,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "{{token}}",
+							"value": "{{outro_token}}",
 							"type": "string"
 						}
 					]
@@ -23,7 +23,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nome\": \"Bud\",\r\n    \"sobrenome\": \"Muller\",\r\n    \"dataDeNascimento\": \"27/06/2021\",\r\n    \"genero\": \"Masculino\",\r\n    \"raca\": \"Maltes\",\r\n    \"cor\": \"Branco\",\r\n    \"porte\": \"pequeno\",\r\n    \"carteiraDeVacinacao\": \"foto carteira\",\r\n    \"fotoDePerfil\":\" foto perfil\",\r\n    \"descricao\": \"animado e carinhoso\",\r\n    \"interesse\": \"relacionamento\",\r\n    \"idTutor\": 3\r\n}",
+					"raw": "{\r\n    \"nome\": \"Gu\",\r\n    \"sobrenome\": \"Santos\",\r\n    \"dataDeNascimento\": \"27/06/2020\",\r\n    \"genero\": \"Masculino\",\r\n    \"raca\": \"Husky\",\r\n    \"cor\": \"Branco\",\r\n    \"porte\": \"medio\",\r\n    \"carteiraDeVacinacao\": \"foto carteira\",\r\n    \"fotoDePerfil\":\" foto perfil\",\r\n    \"descricao\": \"animado e carinhoso\",\r\n    \"interesse\": \"amizade\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -60,7 +60,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"rg\": \"SBC/08/00505\",\r\n    \"dataDeEmissao\": \"27/06/2021\",\r\n    \"fotoPedigree\": \"\",\r\n    \"idPet\": 5\r\n}",
+					"raw": "{\r\n    \"rg\": \"SBC/08/00505\",\r\n    \"dataDeEmissao\": \"27/06/2021\",\r\n    \"fotoPedigree\": \"\",\r\n    \"idPet\": 4\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -162,7 +162,7 @@
 			"response": []
 		},
 		{
-			"name": "Buscar Foto",
+			"name": "Buscar Fotos por Pet",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -204,6 +204,48 @@
 			"response": []
 		},
 		{
+			"name": "Buscar Pet",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_principal}}/pet/buscar/pet/8",
+					"host": [
+						"{{url_principal}}"
+					],
+					"path": [
+						"pet",
+						"buscar",
+						"pet",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Atualizar Pet",
 			"request": {
 				"auth": {
@@ -220,7 +262,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nome\": \"Bud\",\r\n    \"sobrenome\": \"Muller\",\r\n    \"dataDeNascimento\": \"27/06/2021\",\r\n    \"genero\": \"Masculino\",\r\n    \"raca\": \"Maltes\",\r\n    \"cor\": \"Branco\",\r\n    \"porte\": \"pequeno\",\r\n    \"carteiraDeVacinacao\": \"foto carteira\",\r\n    \"fotoDePerfil\":\" foto perfil\",\r\n    \"descricao\": \"animado e carinhoso\",\r\n    \"interesse\": \"relacionamento\",\r\n    \"idTutor\": 3\r\n}",
+					"raw": "{\r\n    \"nome\": \"Bud\",\r\n    \"sobrenome\": \"Muller\",\r\n    \"dataDeNascimento\": \"27/06/2021\",\r\n    \"genero\": \"Masculino\",\r\n    \"raca\": \"Maltes\",\r\n    \"cor\": \"Branco\",\r\n    \"porte\": \"pequeno\",\r\n    \"carteiraDeVacinacao\": \"foto carteira\",\r\n    \"fotoDePerfil\":\" foto perfil\",\r\n    \"descricao\": \"animado e carinhoso\",\r\n    \"interesse\": \"amizade\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -383,14 +425,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{url_principal}}/pet/desativar/5",
+					"raw": "{{url_principal}}/pet/desativar/3",
 					"host": [
 						"{{url_principal}}"
 					],
 					"path": [
 						"pet",
 						"desativar",
-						"5"
+						"3"
 					]
 				}
 			},
@@ -429,6 +471,47 @@
 						"pet",
 						"ativar",
 						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Raças Existentes em Pets",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"rg\": \"SBC/08/00505\",\r\n    \"dataDeEmissao\": \"27/06/2021\",\r\n    \"fotoPedigree\": \"\",\r\n    \"idPet\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_principal}}/pet/listar/racas",
+					"host": [
+						"{{url_principal}}"
+					],
+					"path": [
+						"pet",
+						"listar",
+						"racas"
 					]
 				}
 			},

@@ -9,6 +9,7 @@ public record FiltroFeed(
 		Long idadeMaxima, 
 		String raca, 
 		boolean devePossuirPedigree, 
-		String porte) {
+		String porte,
+		boolean deveSerCastrado) {
 
 }

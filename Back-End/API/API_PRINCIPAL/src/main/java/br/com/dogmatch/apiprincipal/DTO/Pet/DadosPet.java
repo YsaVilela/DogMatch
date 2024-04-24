@@ -36,6 +36,9 @@ public record DadosPet(
 		@NotBlank(message = "Descrição é obrigatória")
 		String descricao,
 		
+		@NotNull (message = "É obrigatório informar se o pet é castrado")
+		boolean castrado,
+		
 		@NotBlank(message = "Interesse é obrigatório")
 		String interesse) {
 }

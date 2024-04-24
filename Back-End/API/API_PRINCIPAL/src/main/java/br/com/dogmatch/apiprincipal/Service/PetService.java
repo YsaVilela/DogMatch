@@ -70,6 +70,7 @@ public class PetService {
 		pet.setCarteiraDeVacinacao("linkFotoDePerfil");
 		pet.setFotoDePerfil("linkCarteirinhaDeVacina");
 		pet.setDescricao(dados.descricao());
+		pet.setCastrado(dados.castrado());
 		pet.setInteresse(dados.interesse());
 		pet.setTutor(tutor.get());
 		pet.setStatus(true);
@@ -182,6 +183,7 @@ public class PetService {
 		pet.setRaca(dados.raca());
 		pet.setCor(dados.cor());
 		pet.setPorte(dados.porte());
+		pet.setCastrado(dados.castrado());
 		pet.setCarteiraDeVacinacao("linkFotoDePerfil");
 		pet.setFotoDePerfil("linkCarteirinhaDeVacina");
 		pet.setDescricao(dados.descricao());

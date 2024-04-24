@@ -12,6 +12,7 @@ public record DadosFeedPet(
 		String porte,
 		String genero,
 		boolean pedigree,
+		boolean castrado,
 		Long distancia
 		) {
 
@@ -25,6 +26,7 @@ public record DadosFeedPet(
 			pet.getPorte(),
 			pet.getGenero(),
 			pet.getDescricao(),
+			pet.getCastrado(),
 			pedigree,
 			distancia);
 	}
